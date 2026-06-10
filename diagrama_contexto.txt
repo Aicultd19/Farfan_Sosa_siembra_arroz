@@ -1,0 +1,137 @@
+DIAGRAMA DE CONTEXTO DEL SISTEMA
+=================================
+Proyecto : Siembra de Arroz en Terreno Suave
+Semestre : 2026-1 · Universidad Nacional de Piura
+
+
+──────────────────────────────────────────────────────────────────
+NIVEL 0 – DIAGRAMA DE CONTEXTO (DFD)
+──────────────────────────────────────────────────────────────────
+
+                       ┌─────────────────────┐
+                       │                     │
+    nombre, clic  ───► │   SISTEMA: JUEGO    │ ──► puntaje, ranking
+                       │   SIEMBRA DE ARROZ  │
+    (interacción) ◄─── │   (index.html +     │ ◄── (BD MySQL)
+                       │    backend PHP)     │
+                       │                     │
+                       └─────────────────────┘
+                                │
+                    ┌───────────┼───────────┐
+                    │           │           │
+              Frontend      Backend      Base de
+              (Canvas)       (PHP)        datos
+                                          (MySQL)
+
+
+──────────────────────────────────────────────────────────────────
+NIVEL 1 – DIAGRAMA DE FLUJO DE DATOS
+──────────────────────────────────────────────────────────────────
+
+ [JUGADOR]
+     │
+     │ nombre del jugador
+     ▼
+ ┌──────────────────────────────────────────────────────────┐
+ │  PROCESO 1: INICIALIZAR PARTIDA                          │
+ │  - Captura nombre del jugador                            │
+ │  - Genera mapa aleatorio (random-walk)                   │
+ │  - Prepara inventario de piezas garantizadas             │
+ │  - Inicia temporizador (300s Nivel 1 / 75s Nivel 2)      │
+ └──────────────────────────────────────────────────────────┘
+     │
+     │ mapa generado, inventario
+     ▼
+ ┌──────────────────────────────────────────────────────────┐
+ │  PROCESO 2: NIVEL 1 – PUZZLE DE CANALES                  │
+ │  - Renderiza grilla 10×6 en Canvas                       │
+ │  - Jugador coloca/quita piezas de canal                  │
+ │  - BFS calcula flujo de agua en tiempo real              │
+ │  - Muestra parcelas regadas en HUD                       │
+ │  - Victoria: ≥4/6 parcelas conectadas                    │
+ └──────────────────────────────────────────────────────────┘
+     │
+     │ pts1, tiempo restante
+     ▼
+ ┌──────────────────────────────────────────────────────────┐
+ │  PROCESO 3: NIVEL 2 – SIEMBRA DE BÁLAGOS                 │
+ │  - Aparecen bálagos pulsantes en posiciones aleatorias   │
+ │  - Jugador hace clic antes de que se agote cada bálago   │
+ │  - Dificultad creciente (intervalo entre bálagos baja)   │
+ │  - Victoria: 20 bálagos sembrados                        │
+ └──────────────────────────────────────────────────────────┘
+     │
+     │ pts2, tiempo total
+     ▼
+ ┌──────────────────────────────────────────────────────────┐
+ │  PROCESO 4: CALCULAR PUNTAJE FINAL                       │
+ │  puntaje = pts1 + pts2 + (tiempo_restante × 2)           │
+ │  - Muestra tabla de resultados                           │
+ │  - Llama al backend vía fetch() POST JSON                │
+ └──────────────────────────────────────────────────────────┘
+     │
+     │ {nombre, puntaje, tiempo, nivel}  JSON / HTTP POST
+     ▼
+ ┌──────────────────────────────────────────────────────────┐
+ │  PROCESO 5: BACKEND – guardar_record.php                 │
+ │  - Valida y sanitiza los campos recibidos                │
+ │  - Ejecuta INSERT INTO tabla_records (PDO preparado)     │
+ │  - Responde { ok: true, id: N }                          │
+ └──────────────────────────────────────────────────────────┘
+     │
+     │ SQL INSERT
+     ▼
+ ┌─────────────────────────────┐
+ │  BASE DE DATOS MySQL        │
+ │  juego_piurano_db           │
+ │  tabla: tabla_records       │
+ │  (id, nombre, puntaje,      │
+ │   tiempo, nivel, fecha)     │
+ └─────────────────────────────┘
+     │
+     │ SELECT TOP 15 ORDER BY puntaje DESC
+     ▲
+ ┌──────────────────────────────────────────────────────────┐
+ │  PROCESO 6: BACKEND – obtener_records.php                │
+ │  - Consulta TOP 15 puntajes                              │
+ │  - Devuelve array JSON                                   │
+ └──────────────────────────────────────────────────────────┘
+     │
+     │ JSON array de récords
+     ▼
+ ┌──────────────────────────────────────────────────────────┐
+ │  PROCESO 7: MOSTRAR RANKING (pantalla de inicio)         │
+ │  - Renderiza tabla con medallas 🥇🥈🥉                   │
+ │  - Actualizable con botón "Ver Ranking"                  │
+ └──────────────────────────────────────────────────────────┘
+     │
+     ▼
+ [JUGADOR] ← ve su posición en el ranking
+
+
+──────────────────────────────────────────────────────────────────
+ENTIDADES EXTERNAS DEL SISTEMA
+──────────────────────────────────────────────────────────────────
+
+  Entidad                 Rol
+  ─────────────────────   ──────────────────────────────────────
+  Jugador                 Usuario final que interactúa con el juego
+  Servidor Web (Apache)   Sirve los archivos HTML/CSS/JS/PHP
+  Motor MySQL             Persiste y consulta los puntajes
+  Navegador Web           Ejecuta el Canvas y el JavaScript
+  Servidor de imágenes    Proporciona fondos (Unsplash o local)
+
+
+──────────────────────────────────────────────────────────────────
+TECNOLOGÍAS DEL SISTEMA
+──────────────────────────────────────────────────────────────────
+
+  Capa            Tecnología        Archivo
+  ─────────────   ───────────────   ──────────────────────────
+  Presentación    HTML5             index.html
+  Estilos         CSS3              assets/css/style.css
+  Lógica juego    JavaScript ES6+   assets/js/game.js
+  Audio           Web Audio API     assets/js/sonido.js
+  Backend         PHP 7.4+          backend/*.php
+  Persistencia    MySQL 5.7+        backend/esquema.sql
+  Comunicación    Fetch API / JSON  game.js ↔ guardar_record.php

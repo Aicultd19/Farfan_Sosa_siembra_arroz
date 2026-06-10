@@ -1,0 +1,208 @@
+/*═══════════════════════════════════════════════════════
+  SIEMBRA DE ARROZ – UNP Ingeniería Informática 2026-1
+  Archivo: assets/css/style.css
+  Descripción: Estilos del juego y todas sus pantallas
+═══════════════════════════════════════════════════════*/
+
+/* ── Reset y base ── */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #07120a;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── HUD ── */
+#hud {
+  width: 980px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(0,0,0,.78);
+  color: #e8dca0;
+  font-size: 13px;
+  border-bottom: 2px solid #387020;
+}
+#hud b { color: #f0c030; }
+
+#lvlbadge {
+  background: #8a3008;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+#btnSonido {
+  background: transparent;
+  border: 1px solid #387020;
+  color: #e8dca0;
+  border-radius: 5px;
+  padding: 2px 7px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background .14s;
+}
+#btnSonido:hover { background: rgba(56,112,32,.4); }
+
+/* ── Canvas ── */
+#gameCanvas {
+  display: block;
+  border: 3px solid #387020;
+  cursor: pointer;
+}
+
+/* ── Pantallas overlay ── */
+.scr {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3,10,4,.96);
+  color: #e8dca0;
+  text-align: center;
+  padding: 22px;
+  z-index: 10;
+  overflow-y: auto;
+}
+.scr h1 { font-size: 1.9em; color: #7dc030; margin-bottom: 8px; }
+.scr h2 { font-size: 1.3em; color: #e8a010; margin-bottom: 8px; }
+.scr h3 { font-size: 1.05em; color: #7dc030; }
+.scr p  { font-size: .91em; max-width: 660px; line-height: 1.72; margin-bottom: 11px; color: #bcd890; }
+.scr ul { text-align: left; max-width: 620px; margin-bottom: 14px; }
+.scr ul li { margin-bottom: 6px; color: #a4ca74; font-size: .89em; }
+
+/* ── Botones ── */
+.btn {
+  background: #2e5c10;
+  color: #fff;
+  border: none;
+  padding: 10px 28px;
+  font-size: .97em;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background .14s;
+}
+.btn:hover  { background: #1e3e08; }
+.btn-red    { background: #841c08; }
+.btn-red:hover { background: #5c1004; }
+.btn-dim    { background: #2c3418; }
+.btn-dim:hover { background: #1e2410; }
+.btn-group  { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+
+/* ── Input nombre ── */
+#inpNombre {
+  padding: 7px 12px;
+  font-size: .92em;
+  border-radius: 5px;
+  border: 2px solid #2e5c10;
+  margin-bottom: 10px;
+  background: #050d02;
+  color: #e8dca0;
+  width: 230px;
+  text-align: center;
+}
+
+/* ── Estrellas ── */
+.stars { font-size: 1.8em; letter-spacing: 4px; color: #e8a010; margin: 6px 0; }
+
+/* ── Tablas de puntaje y ranking ── */
+#scoreTable, #rankingTable {
+  border-collapse: collapse;
+  margin: 8px auto;
+  font-size: .86em;
+  min-width: 300px;
+}
+#scoreTable th, #scoreTable td,
+#rankingTable th, #rankingTable td {
+  border: 1px solid #224008;
+  padding: 5px 12px;
+  color: #b0ca84;
+}
+#scoreTable th, #rankingTable th { background: #0c1a04; color: #7dc030; }
+#rankingTable tr:nth-child(even) td { background: rgba(255,255,255,.03); }
+#rankingTable tr:first-child td { color: #f8c020; font-weight: bold; }
+
+#rankingPanel { margin-top: 12px; max-height: 260px; overflow-y: auto; }
+
+/* ── Panel de inventario ── */
+#invPanel {
+  width: 980px;
+  background: rgba(0,0,0,.74);
+  border-top: 2px solid #387020;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+#invPanel .invlabel {
+  color: #7dc030;
+  font-size: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+  margin-right: 4px;
+  line-height: 1.3;
+}
+
+/* ── Botones de pieza (inventario) ── */
+.pbtn {
+  width: 56px; height: 56px;
+  background: rgba(255,255,255,.06);
+  border: 2px solid #406418;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: border-color .12s, background .12s;
+}
+.pbtn:hover  { background: rgba(70,200,50,.14); border-color: #68d038; }
+.pbtn.sel    { border-color: #f8e028; background: rgba(248,220,28,.18); box-shadow: 0 0 0 1px #f8e028; }
+.pbtn.out    { opacity: .25; cursor: default; pointer-events: none; }
+.pbtn .badge { position: absolute; top: 1px; right: 3px; font-size: 9px; color: #e8a010; font-weight: bold; }
+.pbtn .pname { font-size: 7.5px; color: rgba(180,220,130,.6); margin-top: 1px; }
+
+/* ── Leyenda ── */
+#leyenda {
+  width: 980px;
+  background: rgba(0,0,0,.62);
+  border-top: 1px solid #203810;
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+.li  { display: flex; align-items: center; gap: 4px; font-size: 10px; color: rgba(196,220,144,.72); }
+.ls  { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+
+/* ── Tooltip ── */
+#tip {
+  position: fixed;
+  background: rgba(0,0,0,.9);
+  color: #e8dca0;
+  font-size: 11px;
+  padding: 5px 9px;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 30;
+  white-space: nowrap;
+  border: 1px solid #387020;
+  display: none;
+}
+
+/* ── Utilidades ── */
+.hidden { display: none !important; }

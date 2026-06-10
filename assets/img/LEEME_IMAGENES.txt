@@ -1,0 +1,44 @@
+CARPETA DE IMÁGENES – Siembra de Arroz en Terreno Suave
+========================================================
+
+Coloca aquí tus imágenes para personalizar el juego con elementos piuranos.
+
+IMÁGENES SUGERIDAS:
+───────────────────
+• fango_piura.jpg      → Foto de terreno fangoso / chacra del Valle del Chira
+• compuerta.png        → Imagen de compuerta de acequia real (fondo transparente)
+• acequia.jpg          → Foto de acequia de la Irrigación Chira-Piura
+• agua_flujo.gif       → Animación de agua fluyendo (opcional)
+• cielo_piura.jpg      → Cielo del norte peruano para el fondo
+• logo_unp.png         → Logo UNP para la pantalla de inicio
+
+CARPETA personajes/:
+────────────────────
+• campesino.png        → Agricultor piurano con sombrero de paja toquilla
+                          (mínimo 65×110 px, fondo transparente .png)
+• campesina.png        → Agricultora piurana (opcional)
+• supervisor.png       → Supervisor de campo / ingeniero agrícola (opcional)
+
+CÓMO USAR EN EL CÓDIGO:
+────────────────────────
+Busca los comentarios "=== ZONA PARA TUS IMÁGENES ===" en index.html.
+Por ejemplo, para el campesino:
+
+  const imgCampesino = new Image();
+  imgCampesino.src = 'assets/img/personajes/campesino.png';
+  // Luego dentro de drawPersonajePlaceholder():
+  ctx.drawImage(imgCampesino, x, y, 65, 110);
+
+Para el terreno de la parcela:
+  const imgFango = new Image();
+  imgFango.src = 'assets/img/fango_piura.jpg';
+  // Dentro de drawNivel1(), reemplaza el fillRect de la parcela:
+  ctx.drawImage(imgFango, x+2, y+2, CW-6, CH-6);
+
+FORMATOS ACEPTADOS: .png .jpg .gif .webp
+TAMAÑO RECOMENDADO: Menos de 200 KB por imagen para carga rápida.
+
+FUENTES DE IMÁGENES GRATUITAS DE PIURA:
+• https://www.flickr.com/search/?text=piura+arroz
+• https://www.peru.travel/es/ (imágenes libres de derechos)
+• Fotos propias del Valle del Chira, Sullana, Chulucanas, etc.

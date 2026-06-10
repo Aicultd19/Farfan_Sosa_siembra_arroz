@@ -1,0 +1,10 @@
+# Credenciales de base de datos - NUNCA subir a GitHub
+backend/config_db.php
+
+# Assets grandes (opcional, para no saturar el repo)
+# assets/audio/*.mp3
+# assets/img/*.jpg
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

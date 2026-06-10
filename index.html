@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Siembra de Arroz – Piura</title>
+<link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body>
+<div id="tip"></div>
+
+<!-- ══════════════════════════════════════════
+     PANTALLA: INICIO
+══════════════════════════════════════════ -->
+<div id="sInicio" class="scr">
+  <h1>🌾 Siembra de Arroz</h1>
+  <h2>Valle del Chira · Irrigación Chira-Piura</h2>
+  <p>Construye los canales de riego para llevar el agua desde las acequias hasta las parcelas de arroz del norte peruano.</p>
+  <ul>
+    <li>🔧 <b>Nivel 1:</b> Selecciona una pieza del inventario → haz clic en una celda oscura para colocarla. Haz clic en una pieza verde para recuperarla. Usa piezas <b>T (bifurcación)</b> para regar varias parcelas a la vez. Quita rocas con clic (−10 pts). El mapa cambia cada partida.</li>
+    <li>🌱 <b>Nivel 2:</b> Haz clic rápido en los bálagos dorados antes de que se agoten.</li>
+  </ul>
+  <input id="inpNombre" type="text" placeholder="Tu nombre" maxlength="20"/>
+  <div class="btn-group">
+    <button class="btn" onclick="iniciar()">🌾 ¡Comenzar!</button>
+    <button class="btn btn-dim" onclick="mostrarRanking()">🏆 Ver Ranking</button>
+  </div>
+
+  <!-- Tabla de ranking en pantalla inicio -->
+  <div id="rankingPanel" class="hidden">
+    <h3 style="color:#7dc030;margin:14px 0 6px;">🏆 Mejores Puntajes</h3>
+    <table id="rankingTable">
+      <thead>
+        <tr><th>#</th><th>Jugador</th><th>Puntaje</th><th>Nivel</th><th>Fecha</th></tr>
+      </thead>
+      <tbody id="rankingBody">
+        <tr><td colspan="5" style="text-align:center;color:#888;">Cargando...</td></tr>
+      </tbody>
+    </table>
+    <button class="btn btn-dim" style="margin-top:8px;font-size:.82em;" onclick="ocultarRanking()">✕ Cerrar ranking</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANTALLA: INSTRUCCIÓN DE NIVEL
+══════════════════════════════════════════ -->
+<div id="sNivel" class="scr hidden">
+  <div id="infoNivel"></div>
+  <button class="btn" onclick="empezar()">▶ ¡Empezar!</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANTALLA: TRANSICIÓN ENTRE NIVELES
+══════════════════════════════════════════ -->
+<div id="sTrans" class="scr hidden">
+  <h2 id="tMsg"></h2>
+  <div class="stars" id="tStars"></div>
+  <p id="tDesc"></p>
+  <button class="btn" onclick="siguiente()">Nivel 2 ▶</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANTALLA: GAME OVER
+══════════════════════════════════════════ -->
+<div id="sOver" class="scr hidden">
+  <h1>⏰ ¡Tiempo agotado!</h1>
+  <p id="overMsg"></p>
+  <button class="btn btn-red" onclick="reintentar()">🔄 Nuevo mapa y reintentar</button>
+  <button class="btn btn-dim" onclick="menu()" style="margin-top:6px">🏠 Menú</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANTALLA: FINAL / VICTORIA
+══════════════════════════════════════════ -->
+<div id="sFinal" class="scr hidden">
+  <h1>🏆 ¡Cosecha lista!</h1>
+  <div class="stars" id="fStars"></div>
+  <p id="fMsg"></p>
+  <table id="scoreTable">
+    <thead><tr><th>Concepto</th><th>Puntos</th></tr></thead>
+    <tbody id="scoreBody"></tbody>
+  </table>
+  <p id="dbMsg" style="color:#e8a010;font-size:.84em;margin-top:8px;"></p>
+  <button class="btn" onclick="menu()">🏠 Volver al inicio</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HUD (Heads-Up Display)
+══════════════════════════════════════════ -->
+<div id="hud">
+  <span>🌾 Siembra de Arroz – Piura, Perú</span>
+  <span id="lvlbadge">Nivel 1</span>
+  <span>⭐ <b id="hudPts">0</b> pts</span>
+  <span>⏱️ <b id="hudTime">300</b>s</span>
+  <span id="hudExtra">Parcelas: 0/6 (meta: 4)</span>
+  <!-- Control de sonido -->
+  <button id="btnSonido" onclick="toggleSonido()" title="Activar/Desactivar sonido">🔊</button>
+</div>
+
+<!-- CANVAS PRINCIPAL -->
+<canvas id="gameCanvas" width="980" height="450"></canvas>
+
+<!-- ══════════════════════════════════════════
+     PANEL DE INVENTARIO (Nivel 1)
+══════════════════════════════════════════ -->
+<div id="invPanel" class="hidden">
+  <div class="invlabel">PIEZAS<br>CANAL:</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     LEYENDA (Nivel 1)
+══════════════════════════════════════════ -->
+<div id="leyenda" class="hidden">
+  <div class="li"><div class="ls" style="background:#1060a8;border:1px solid #30a8f0;"></div>Con agua</div>
+  <div class="li"><div class="ls" style="background:#184e10;border:1px solid #3a8028;"></div>Fijo (guía)</div>
+  <div class="li"><div class="ls" style="background:#287820;border:1px solid #50d840;"></div>Tu pieza</div>
+  <div class="li"><div class="ls" style="background:#181008;border:1px solid #50503a;"></div>Libre (pon pieza)</div>
+  <div class="li"><div class="ls" style="background:#901808;border:1px solid #e03010;"></div>Roca (−10pts)</div>
+  <div class="li" style="color:rgba(220,210,110,.7);">ESC = cancelar · Clic derecho = quitar pieza</div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="assets/js/sonido.js"></script>
+<script src="assets/js/game.js"></script>
+</body>
+</html>

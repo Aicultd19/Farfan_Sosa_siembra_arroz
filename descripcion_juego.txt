@@ -1,0 +1,169 @@
+DESCRIPCIÓN DEL VIDEOJUEGO
+==========================
+Título    : Siembra de Arroz en Terreno Suave
+Número    : Juego #13 del catálogo (Costumbres Piuranas)
+Plataforma: Web (HTML5 Canvas)
+Público   : Niños y jóvenes a partir de 6 años
+Semestre  : 2026-1 · Universidad Nacional de Piura
+
+
+1. RESUMEN GENERAL
+------------------
+"Siembra de Arroz en Terreno Suave" es un videojuego educativo interactivo que
+recrea el proceso de siembra de arroz en los valles agrícolas de la región Piura,
+Perú. El jugador aprende sobre la importancia del riego, el manejo de compuertas
+y la técnica de siembra en terreno inundado, propias de la agricultura tradicional
+norteña peruana.
+
+El juego consta de dos niveles con mecánicas diferenciadas, un sistema de puntuación,
+temporizadores de desafío y conexión a base de datos MySQL para registrar puntajes.
+
+
+2. HISTORIA / NARRATIVA
+------------------------
+El Valle del Chira, en Piura, es una de las zonas arroceras más importantes del
+norte del Perú. Cada año, los agricultores piuranos abren las compuertas de las
+acequias de la gran Irrigación Chira-Piura para inundar sus terrenos de fango
+blando y luego colocar manualmente los bálagos (plántulas) de arroz en el lodo,
+uno a uno, con paciencia y habilidad.
+
+En este juego, tú eres ese agricultor. ¿Puedes llenar todos los campos de agua
+y sembrar todos los bálagos a tiempo?
+
+
+3. MECÁNICA DE JUEGO
+---------------------
+
+NIVEL 1 – CANALIZAR FLUJOS DE AGUA (300 segundos)
+  • Pantalla: 10 columnas × 6 filas de celdas; 2 acequias (fuentes) en la columna
+    izquierda, 6 parcelas en la columna derecha.
+  • Acción: Selecciona una pieza de canal del inventario y haz clic en las celdas
+    oscuras para colocarla. Conecta las acequias con las parcelas.
+  • Piezas disponibles: rectas (─│), curvas (└┘┌┐), bifurcaciones T (├┤┴┬) y cruz (+).
+  • Pistas: algunas celdas ya traen piezas FIJAS (azules) que no se pueden mover.
+  • Rocas: celdas bloqueadas que se pueden quitar con clic (−10 pts).
+  • El mapa se genera de forma aleatoria cada partida.
+  • Victoria: conectar al menos 4 de 6 parcelas al flujo antes de que se acabe el tiempo.
+  • Puntuación: +30 puntos por cada parcela regada.
+
+NIVEL 2 – INSERTAR BÁLAGOS (75 segundos)
+  • Pantalla: Campo completamente inundado con el terreno preparado.
+  • Acción: Los puntos dorados pulsantes aparecen a intervalos regulares
+    en posiciones aleatorias del campo.
+  • Desafío: Cada bálago tiene una barra de tiempo propia; si no haces clic
+    a tiempo, desaparece. La dificultad aumenta gradualmente.
+  • Victoria: Sembrar los 20 bálagos requeridos antes de que se agote el tiempo.
+  • Puntuación: +15 puntos por cada bálago sembrado.
+
+
+4. SISTEMA DE PUNTUACIÓN
+-------------------------
+  Nivel 1 – Inundación:  hasta 180 puntos (6 parcelas × 30 pts)
+  Nivel 2 – Siembra:     hasta 300 puntos (20 bálagos × 15 pts)
+  Bonus tiempo:          segundos restantes × 2
+  Penalización roca:     −10 pts por cada roca quitada
+  Máximo posible:        ~630 puntos
+
+  Al completar ambos niveles, el puntaje se envía al servidor MySQL
+  mediante fetch() asíncrono hacia backend/guardar_record.php.
+
+
+5. ELEMENTOS CULTURALES PIURANOS
+----------------------------------
+  • Acequia de riego: Sistema de irrigación por gravedad del Valle del Chira.
+  • Irrigación Chira-Piura: Proyecto hídrico que riega más de 100,000 ha en Piura.
+  • Bálago: Plántula de arroz lista para trasplante en el campo inundado.
+  • Terreno suave / fango: Suelo arcilloso encharcado donde se trasplanta el arroz.
+  • Compuerta: Elemento metálico que regula el paso del agua en los canales.
+  • Sombrero de paja toquilla: El personaje campesino lo porta (artesanía de Catacaos).
+  • Valle del Chira: Principal zona arrocera de la región Piura.
+
+
+6. ESTRUCTURA DE ARCHIVOS
+--------------------------
+  siembra_arroz/
+  ├── index.html                    → Estructura HTML del juego
+  ├── assets/
+  │   ├── css/
+  │   │   └── style.css             → Estilos del juego
+  │   ├── js/
+  │   │   ├── game.js               → Lógica principal del juego
+  │   │   └── sonido.js             → Gestión de audio
+  │   ├── img/
+  │   │   ├── LEEME_IMAGENES.txt    → Guía para agregar fotos de Piura
+  │   │   └── personajes/
+  │   │       └── LEEME_IMAGENES.txt
+  │   └── audio/
+  │       └── LEEME_AUDIO.txt       → Guía para agregar sonidos
+  ├── backend/
+  │   ├── config_db.php             → Configuración de base de datos
+  │   ├── guardar_record.php        → API: guarda puntaje en MySQL
+  │   ├── obtener_records.php       → API: devuelve TOP 15 ranking
+  │   └── esquema.sql               → Esquema de la base de datos
+  ├── descripcion_juego.txt         → Este archivo
+  ├── bitacora.txt                  → Bitácora de desarrollo
+  ├── diagrama_contexto.txt         → Diagrama de contexto del sistema
+  ├── glosario.txt                  → Glosario de términos
+  └── mini_manual.txt               → Manual básico del jugador
+
+
+7. PERSONALIZACIÓN CON IMÁGENES DE PIURA
+------------------------------------------
+El código tiene marcadores donde puedes reemplazar las imágenes de Unsplash
+con fotografías reales de:
+  - Campos arroceros del Valle del Chira
+  - Acequias de la Irrigación Chira-Piura
+  - Agricultores piuranos sembrando arroz
+  - El paisaje del norte del Perú
+
+En game.js busca las líneas:
+  loadImg('bg1', '...')   → Fondo Nivel 1
+  loadImg('bg2', '...')   → Fondo Nivel 2
+  loadImg('person', '...') → Personaje campesino
+
+Reemplaza con:
+  loadImg('bg1',    'assets/img/campo_chira.jpg')
+  loadImg('bg2',    'assets/img/campo_inundado.jpg')
+  loadImg('person', 'assets/img/personajes/campesino.png')
+
+
+8. INSTRUCCIONES DE DESPLIEGUE
+---------------------------------
+  XAMPP (Local):
+  1. Copia la carpeta siembra_arroz/ en: C:/xampp/htdocs/
+  2. Abre phpMyAdmin → ejecuta backend/esquema.sql
+  3. Edita backend/config_db.php con tus datos
+  4. Abre: http://localhost/siembra_arroz/
+
+  Servidor en línea:
+  1. Sube los archivos por FTP / cPanel File Manager
+  2. Crea la base de datos desde cPanel → MySQL Databases
+  3. Ejecuta esquema.sql en phpMyAdmin
+  4. Edita config_db.php con host, user, pass y DB de tu hosting
+
+  GitHub Pages (solo frontend, sin base de datos):
+  Funciona pero el ranking mostrará "Backend no disponible".
+
+
+9. REQUISITOS TÉCNICOS
+-----------------------
+  • Navegador moderno: Chrome 90+, Firefox 88+, Edge 90+ (Canvas API)
+  • Para la base de datos: PHP 7.4+ y MySQL 5.7+ (XAMPP o hosting)
+  • Sin dependencias externas (sin librerías JS de terceros)
+  • Resolución mínima: 820 × 600 px
+
+
+10. VALOR EDUCATIVO
+--------------------
+  Al jugar, el estudiante aprende:
+  • Cómo funciona un sistema de riego por acequias (física del agua)
+  • Pensamiento lógico: conectar nodos con piezas de forma como un circuito
+  • La importancia de la temporización y la paciencia en la agricultura
+  • Terminología agrícola del norte peruano
+  • Que Piura es una región de gran producción arrocera en el Perú
+  • El valor del trabajo del agricultor piurano
+
+
+Desarrollado por: [Tu nombre]
+Universidad Nacional de Piura – Ingeniería Informática – 2026-1
+Facultad de Ingeniería Industrial

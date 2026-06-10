@@ -1,0 +1,17 @@
+INSTRUCCIONES PARA PERSONAJES
+===============================
+Carpeta: assets/img/personajes/
+
+Coloca aquí la imagen del personaje campesino piurano.
+
+  campesino.png   → Imagen del agricultor (con sombrero de paja toquilla)
+
+Luego en assets/js/game.js edita:
+  loadImg('person', 'https://...')
+  →  loadImg('person', 'assets/img/personajes/campesino.png')
+
+Dimensiones recomendadas: 80 × 90 píxeles.
+La imagen se mostrará recortada en círculo en la esquina inferior derecha.
+
+Si no colocas ninguna imagen, el juego dibuja automáticamente
+un personaje animado con sombrero de paja toquilla.

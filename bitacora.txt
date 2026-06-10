@@ -1,0 +1,144 @@
+BITÁCORA DE DESARROLLO
+======================
+Proyecto : Siembra de Arroz en Terreno Suave
+Curso    : Tecnología y Desarrollo Web (Programación Multimedia)
+Docente  : Jonathan D. Nima Ramos / Dr. Walter Richard Paiva Ayala
+Semestre : 2026-1 · Universidad Nacional de Piura
+Alumno   : Carmen Lucia Farfan Sosa
+
+
+──────────────────────────────────────────────────────────────────
+SESIÓN 01  |  Fecha: ___/___/2026
+──────────────────────────────────────────────────────────────────
+Actividades realizadas:
+  - Revisión del catálogo de 52 juegos propuestos por el docente.
+  - Selección del tema: Juego #13 – Siembra de Arroz en Terreno Suave.
+  - Análisis de la mecánica de dos niveles.
+  - Diseño del esquema inicial en papel (boceto del canvas).
+
+Decisiones tomadas:
+  - Nivel 1: puzzle de canalización de agua (tipo "pipe dream").
+  - Nivel 2: clic rápido sobre bálagos pulsantes con temporizador.
+  - Tecnología: HTML5 Canvas, JavaScript puro, PHP + MySQL.
+
+Dificultades:
+  - Ninguna en esta sesión.
+
+──────────────────────────────────────────────────────────────────
+SESIÓN 02  
+──────────────────────────────────────────────────────────────────
+Actividades realizadas:
+  - Creación de la estructura de carpetas del proyecto.
+  - Implementación del canvas base (980 × 450 px).
+  - Diseño del HUD (puntos, tiempo, nivel, parcelas).
+  - Primera versión del generador de mapa aleatorio.
+
+Decisiones tomadas:
+  - Grilla de 10 × 6 celdas con tamaño de celda CS=72px.
+  - Fuentes en columna 0, filas 1 y 4. Parcelas en columna 9.
+  - Random-walk dirigido hacia la derecha con probabilidad de desvío.
+
+Dificultades:
+  - El random-walk a veces generaba mapas sin solución.
+  - Solución: garantizar camino mínimo con BFS de verificación.
+
+──────────────────────────────────────────────────────────────────
+SESIÓN 03 
+──────────────────────────────────────────────────────────────────
+Actividades realizadas:
+  - Implementación de los 11 tipos de piezas (H, V, curvas, T, X).
+  - Función drawPipe() para renderizar cada pieza en canvas.
+  - Panel de inventario HTML con mini-canvas por tipo de pieza.
+  - Sistema de selección de pieza con toggle y cursor crosshair.
+  - Clic derecho para recuperar pieza del jugador.
+
+Decisiones tomadas:
+  - Usar canvas secundarios (38×38) para el preview de cada pieza.
+  - Mostrar siempre todos los 11 tipos en el inventario (mínimo 3 c/u).
+
+Dificultades:
+  - Las piezas T no aparecían siempre en el inventario.
+  - Solución: inventario fijo garantizado independiente del mapa.
+
+──────────────────────────────────────────────────────────────────
+SESIÓN 04  
+──────────────────────────────────────────────────────────────────
+Actividades realizadas:
+  - Algoritmo BFS de flujo de agua entre celdas conectadas.
+  - Animación de agua con transición gradual (agua 0.0 → 1.0).
+  - Sistema de partículas para efecto visual del flujo.
+  - Indicador en tiempo real de parcelas regadas en el HUD.
+
+Decisiones tomadas:
+  - BFS desde fuentes detectando conexión de bocas opuestas.
+  - Meta: 4 de 6 parcelas para permitir soluciones alternativas.
+
+Dificultades:
+  - El agua "saltaba" entre piezas no conectadas correctamente.
+  - Solución: verificar que la boca de salida A == boca entrada B (OPP).
+
+──────────────────────────────────────────────────────────────────
+SESIÓN 05 
+──────────────────────────────────────────────────────────────────
+Actividades realizadas:
+  - Implementación completa del Nivel 2 (bálagos).
+  - Sistema de aparición progresiva con intervalo decreciente.
+  - Barra de tiempo individual por bálago.
+  - Partículas de éxito al hacer clic en bálago correcto.
+  - Transición Nivel 1 → Nivel 2 con pantalla de resultados parciales.
+
+Decisiones tomadas:
+  - META2 = 20 bálagos para completar el nivel.
+  - Tiempo N2 = 75 segundos; tiempo N1 = 300 segundos.
+
+Dificultades:
+  - Colisión de clic con múltiples bálagos superpuestos.
+  - Solución: recorrer array en orden inverso y hacer break al primer hit.
+
+──────────────────────────────────────────────────────────────────
+SESIÓN 06  
+──────────────────────────────────────────────────────────────────
+Actividades realizadas:
+  - Creación del backend PHP (guardar_record.php, obtener_records.php).
+  - Archivo de configuración separado config_db.php.
+  - Prueba de conexión con XAMPP local.
+  - Tabla de ranking en pantalla de inicio con fetch() asíncrono.
+  - Esquema SQL con índice de ordenamiento por puntaje.
+
+Decisiones tomadas:
+  - Uso de PDO con sentencias preparadas (seguridad SQL Injection).
+  - Separar config_db.php para no exponer credenciales.
+
+Dificultades:
+  - Error CORS al hacer fetch desde el frontend.
+  - Solución: agregar cabeceras Access-Control-Allow-Origin: * en PHP.
+
+──────────────────────────────────────────────────────────────────
+SESIÓN 07  
+──────────────────────────────────────────────────────────────────
+Actividades realizadas:
+  - Separación del código monolítico en HTML + CSS + JS.
+  - Creación de assets/css/style.css y assets/js/game.js.
+  - Módulo de sonido assets/js/sonido.js con Web Audio API.
+  - Control de sonido en HUD (botón 🔊/🔇).
+  - Música de fondo con loop y efectos: pieza, roca, bálago, victoria.
+  - Redacción de documentación: bitácora, glosario, manual.
+
+Decisiones tomadas:
+  - Archivos de audio en assets/audio/ (MP3/OGG).
+  - Si el archivo no existe el juego no se rompe (try-catch en play()).
+
+Dificultades:
+  - Autoplay bloqueado en navegadores modernos sin interacción previa.
+  - Solución: iniciar música en el evento de clic del botón "Empezar".
+
+──────────────────────────────────────────────────────────────────
+PENDIENTE / MEJORAS FUTURAS
+──────────────────────────────────────────────────────────────────
+  [ ] Agregar fotografías reales del Valle del Chira
+  [ ] Agregar música de fondo con tonada piurana (marinera norteña)
+  [ ] Agregar efecto de sonido de agua real
+  [ ] Agregar un tercer nivel (clasificación de arroz por calidad)
+  [ ] Animación de personaje campesino propio
+  [ ] Versión responsive para móviles
+  [ ] Integración con ranking en tiempo real con WebSockets

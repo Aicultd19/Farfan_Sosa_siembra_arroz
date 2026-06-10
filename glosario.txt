@@ -1,0 +1,116 @@
+GLOSARIO DE TÉRMINOS
+====================
+Proyecto : Siembra de Arroz en Terreno Suave
+Semestre : 2026-1 · Universidad Nacional de Piura
+
+
+════════════════════════════════════════════════
+A. TÉRMINOS AGRÍCOLAS Y CULTURALES DE PIURA
+════════════════════════════════════════════════
+
+Acequia
+  Canal artificial de riego construido para derivar agua de un río
+  hacia los campos de cultivo. En el Valle del Chira se usa una extensa
+  red de acequias del Proyecto Chira-Piura para regar las parcelas
+  arroceras y de otros cultivos.
+
+Bálago (plántula de arroz)
+  Planta joven de arroz que ha germinado en almácigos y está lista
+  para ser trasplantada al campo definitivo. En Piura se produce en
+  eras húmedas y se arranca manualmente para sembrar uno a uno en
+  el fango blando del terreno inundado.
+
+Compuerta
+  Estructura metálica o de concreto instalada en los canales de riego
+  para controlar el paso del agua. Al abrirla, el agua fluye hacia
+  las parcelas; al cerrarla, se detiene el flujo.
+
+Fango / Terreno suave
+  Suelo arcilloso saturado de agua donde se trasplanta el arroz.
+  La consistencia blanda es necesaria para que las raíces del bálago
+  penetren fácilmente sin romperse.
+
+Irrigación Chira-Piura
+  Proyecto de infraestructura hídrica del gobierno peruano que regula
+  el caudal de los ríos Chira y Piura mediante el Reservorio de Poechos
+  para irrigar más de 100,000 hectáreas en los valles de Piura y Sullana.
+
+Mita de agua
+  Sistema tradicional andino y costeño de distribución equitativa del
+  agua de riego entre los agricultores, con turnos y volúmenes asignados
+  por las juntas de usuarios.
+
+Valle del Chira
+  Zona agrícola del departamento de Piura irrigada por el río Chira.
+  Es la principal zona de producción arrocera del norte del Perú,
+  aprovechando el clima cálido y los suelos fértiles.
+
+
+════════════════════════════════════════════════
+B. TÉRMINOS TÉCNICOS DEL VIDEOJUEGO
+════════════════════════════════════════════════
+
+BFS (Breadth-First Search)
+  Algoritmo de búsqueda en anchura utilizado en el juego para calcular
+  qué celdas reciben agua desde las acequias, propagando el flujo
+  celda por celda según las bocas conectadas de cada pieza.
+
+Canvas (HTML5 Canvas API)
+  Elemento HTML que proporciona una superficie de dibujo bidimensional
+  controlada por JavaScript. Todo el gráfico del juego se renderiza
+  en un canvas de 980 × 450 píxeles mediante la API de contexto 2D.
+
+Game Loop
+  Ciclo principal del juego ejecutado por requestAnimationFrame()
+  a aproximadamente 60 FPS. En cada iteración actualiza el estado
+  del juego (física, flujo, partículas) y redibuja el canvas.
+
+HUD (Heads-Up Display)
+  Interfaz superpuesta al juego que muestra información en tiempo real:
+  nivel actual, puntuación, tiempo restante y parcelas regadas.
+
+Inventario
+  Panel inferior que muestra todas las piezas de canal disponibles
+  para que el jugador las seleccione y coloque en el mapa.
+
+Partículas
+  Puntos animados que simulan el flujo visual del agua fluyendo por
+  los tubos. Se generan en las celdas con agua y se mueven según la
+  dirección de las bocas de la pieza activa.
+
+PDO (PHP Data Objects)
+  Interfaz de acceso a bases de datos en PHP que permite usar
+  sentencias preparadas (prepared statements), previniendo ataques
+  de inyección SQL y haciendo el código más seguro y portable.
+
+Random Walk
+  Algoritmo de caminata aleatoria usado para generar el camino de
+  solución del mapa. Desde cada fuente avanza preferentemente hacia
+  la derecha (60%) con posibilidad de desvíos verticales (35%).
+
+Sentencia Preparada (Prepared Statement)
+  Consulta SQL parametrizada donde los valores de usuario se envían
+  separados de la estructura SQL, impidiendo que un valor malicioso
+  altere la consulta. Ejemplo: INSERT INTO tabla VALUES (:nombre).
+
+Web Audio API
+  Interfaz del navegador para generar y controlar audio en aplicaciones
+  web. En el juego se usa para cargar y reproducir efectos de sonido
+  (.mp3) y música de fondo, con control de volumen y loop.
+
+
+════════════════════════════════════════════════
+C. TIPOS DE PIEZAS DE CANAL
+════════════════════════════════════════════════
+
+H   (─)   Recta horizontal: bocas Este y Oeste.
+V   (│)   Recta vertical: bocas Norte y Sur.
+LR  (└)   Curva inferior-izquierda: bocas Norte y Este.
+LL  (┘)   Curva inferior-derecha: bocas Norte y Oeste.
+UL  (┌)   Curva superior-izquierda: bocas Sur y Este.
+UR  (┐)   Curva superior-derecha: bocas Sur y Oeste.
+TE  (├)   Bifurcación T derecha: bocas Norte, Sur y Este.
+TW  (┤)   Bifurcación T izquierda: bocas Norte, Sur y Oeste.
+TN  (┴)   Bifurcación T arriba: bocas Norte, Este y Oeste.
+TS  (┬)   Bifurcación T abajo: bocas Sur, Este y Oeste.
+X   (+)   Cruz completa: bocas Norte, Sur, Este y Oeste.

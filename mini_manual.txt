@@ -1,0 +1,137 @@
+MINI MANUAL DEL JUGADOR
+=======================
+Siembra de Arroz en Terreno Suave
+Universidad Nacional de Piura – 2026-1
+
+
+════════════════════════════════════════
+¿DE QUÉ TRATA EL JUEGO?
+════════════════════════════════════════
+Eres un agricultor del Valle del Chira, en Piura. Tu misión es:
+  1. Construir los canales de riego para inundar las parcelas de arroz.
+  2. Sembrar los bálagos (plántulas) a tiempo en el campo inundado.
+
+Tienes DOS niveles que superar para completar la cosecha.
+
+
+════════════════════════════════════════
+NIVEL 1 – CONSTRUYE LOS CANALES
+════════════════════════════════════════
+
+OBJETIVO: Conectar al menos 4 de 6 parcelas al flujo de agua.
+TIEMPO:   300 segundos (5 minutos)
+PUNTOS:   +30 por cada parcela regada · −10 por cada roca quitada
+
+CÓMO JUGAR:
+  1. Mira el mapa. Las celdas AZULES son las ACEQUIAS (agua de origen).
+     Las celdas con 🌾 son las PARCELAS que debes regar.
+
+  2. En el panel inferior verás las PIEZAS DE CANAL disponibles.
+     Hay de varios tipos: rectas, curvas, bifurcaciones T y cruces.
+     Siempre tendrás al menos 3 de cada tipo.
+
+  3. HAZ CLIC en una pieza del panel para seleccionarla
+     (se resalta en amarillo).
+
+  4. HAZ CLIC en una celda OSCURA del mapa para colocar la pieza ahí.
+     El agua fluirá automáticamente si la pieza conecta correctamente.
+
+  5. Para QUITAR una pieza que ya pusiste:
+     - Haz clic en la pieza verde en el mapa, O
+     - Haz CLIC DERECHO sobre ella.
+
+  6. Las celdas con FIJO (color azul oscuro) son piezas que ya vienen
+     colocadas y no se pueden mover — son pistas del camino.
+
+  7. Las 🪨 ROCAS bloquean el paso. Puedes quitarlas haciendo clic
+     sobre ellas, pero pierdes −10 puntos cada vez.
+
+  8. Presiona ESC en cualquier momento para deseleccionar la pieza.
+
+TRUCO: Usa las piezas T (├ ┤ ┴ ┬) para ramificar el agua hacia
+       varias parcelas a la vez sin usar más piezas rectas.
+
+
+════════════════════════════════════════
+NIVEL 2 – SIEMBRA LOS BÁLAGOS
+════════════════════════════════════════
+
+OBJETIVO: Sembrar 20 bálagos antes de que se acabe el tiempo.
+TIEMPO:   75 segundos
+PUNTOS:   +15 por cada bálago sembrado correctamente
+
+CÓMO JUGAR:
+  1. El campo está inundado. Aparecerán círculos dorados pulsantes
+     (🌱) en posiciones aleatorias del canvas.
+
+  2. HAZ CLIC rápido sobre cada círculo dorado para sembrar el bálago.
+     Cada uno tiene una pequeña barra de tiempo (verde → roja):
+     cuando llega a cero, el bálago desaparece y pierdes esa oportunidad.
+
+  3. Con el tiempo, los bálagos aparecen más seguido y duran menos.
+     ¡Haz clic lo más rápido que puedas!
+
+  4. Siembra los 20 bálagos y ganarás el nivel.
+
+
+════════════════════════════════════════
+SISTEMA DE PUNTUACIÓN
+════════════════════════════════════════
+
+  Parcela regada (N1)      +30 puntos
+  Bálago sembrado (N2)     +15 puntos
+  Bonus tiempo final       +2 puntos × segundo restante
+  Roca quitada             −10 puntos
+
+  ┌─────────────────────────────────────────┐
+  │ Máximo posible: ~630 puntos             │
+  │  (180 pts N1 + 300 pts N2 + bonus)      │
+  └─────────────────────────────────────────┘
+
+  Al terminar, tu puntaje se guarda automáticamente y aparecerá
+  en el RANKING de la pantalla de inicio. ¡Intenta quedar en el TOP!
+
+
+════════════════════════════════════════
+CONTROLES
+════════════════════════════════════════
+
+  Clic izquierdo   → Seleccionar pieza / Colocar pieza / Clic en bálago
+  Clic derecho     → Quitar pieza colocada (Nivel 1)
+  ESC              → Deseleccionar pieza actual (Nivel 1)
+  Botón 🔊/🔇     → Activar / desactivar sonido (HUD superior)
+
+
+════════════════════════════════════════
+CONSEJOS Y ESTRATEGIAS
+════════════════════════════════════════
+
+  ★ Planifica el camino antes de colocar piezas. Sigue las piezas
+    FIJAS (azules) como guía del camino más corto.
+
+  ★ Las piezas T son las más valiosas: con una sola puedes dividir
+    el agua en dos direcciones y regar dos parcelas a la vez.
+
+  ★ No gastes tiempo quitando muchas rocas; solo hazlo si bloquean
+    el único camino posible a una parcela que necesitas.
+
+  ★ En el Nivel 2, mueve el cursor al centro del canvas para tener
+    menos distancia que recorrer cuando aparezca cada bálago.
+
+  ★ En el Nivel 2, los círculos más antiguos (barra más roja) están
+    a punto de desaparecer — priorízalos.
+
+
+════════════════════════════════════════
+RANKING
+════════════════════════════════════════
+
+  Desde la pantalla de inicio, presiona 🏆 VER RANKING para ver
+  el Top 15 de los mejores jugadores guardados en la base de datos.
+
+  Las medallas indican:  🥇 1er lugar  🥈 2do  🥉 3ro
+
+
+────────────────────────────────────────
+¡Buena suerte, agricultor piurano! 🌾
+────────────────────────────────────────

@@ -1,0 +1,38 @@
+CARPETA DE AUDIO – Siembra de Arroz en Terreno Suave
+=====================================================
+
+Coloca aquí los archivos de audio para enriquecer el juego.
+
+ARCHIVOS SUGERIDOS:
+───────────────────
+• agua_flujo.mp3       → Sonido de agua corriendo por acequia
+• click_compuerta.mp3  → Sonido al abrir/cerrar una compuerta
+• siembra.mp3          → Sonido suave al sembrar un bálago
+• fondo_campo.mp3      → Música ambiental de campo piurano (loop)
+• victoria.mp3         → Fanfarria al completar el nivel
+• error.mp3            → Sonido cuando se pierde tiempo
+• tondero.mp3          → Fragmento de música típica piurana (opcional)
+
+CÓMO USAR EN EL CÓDIGO (index.html):
+──────────────────────────────────────
+Al inicio del script, declara los audios:
+
+  const sfxAgua       = new Audio('assets/audio/agua_flujo.mp3');
+  const sfxCompuerta  = new Audio('assets/audio/click_compuerta.mp3');
+  const sfxSiembra    = new Audio('assets/audio/siembra.mp3');
+  const musicaFondo   = new Audio('assets/audio/fondo_campo.mp3');
+  musicaFondo.loop    = true;
+
+Luego llámalos en los eventos:
+  sfxCompuerta.play();   // dentro de clickNivel1()
+  sfxSiembra.play();     // dentro de clickNivel2() al sembrar
+  musicaFondo.play();    // al iniciar empezarNivel()
+  musicaFondo.pause();   // en detenerTimer()
+
+FORMATOS ACEPTADOS: .mp3 .ogg .wav
+TAMAÑO RECOMENDADO: Menos de 500 KB por archivo.
+
+FUENTES DE AUDIO LIBRE:
+• https://freesound.org – sonidos de agua, campo, naturaleza
+• https://www.zapsplat.com – efectos gratuitos con cuenta
+• https://pixabay.com/music/ – música de fondo sin derechos
