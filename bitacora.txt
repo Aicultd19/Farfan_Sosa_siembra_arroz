@@ -1,8 +1,8 @@
 BITÁCORA DE DESARROLLO
 ======================
 Proyecto : Siembra de Arroz en Terreno Suave
-Curso    : Tecnología y Desarrollo Web (Programación Multimedia)
-Docente  : Jonathan D. Nima Ramos / Dr. Walter Richard Paiva Ayala
+Curso    : Programación Multimedia
+Docente  :Dr. Walter Richard Paiva Ayala
 Semestre : 2026-1 · Universidad Nacional de Piura
 Alumno   : Carmen Lucia Farfan Sosa
 
