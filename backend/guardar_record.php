@@ -17,10 +17,10 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // ── Configuración de conexión ──────────────────
-$host    = 'localhost';
-$usuario = 'root';
-$clave   = '';           // Cambiar si tienes contraseña
-$base    = 'juego_piurano_db';
+$host    = 'bimoulrbih3vppbibjwq-mysql.services.clever-cloud.com';
+$usuario = 'uecmbv5kiqweniav';
+$clave   = 'OoyPcZ2A93OqU5FgMPfc';           // Cambiar si tienes contraseña
+$base    = 'bimoulrbih3vppbibjwq';
 
 // ── Recibir JSON ────────────────────────────────
 $entrada = json_decode(file_get_contents('php://input'), true);
